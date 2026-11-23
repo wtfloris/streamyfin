@@ -18,6 +18,11 @@ the store is created. A new MMKV key the app cannot rebuild (a server, an
 account, a user choice) must be added to that list, or it will be lost on tvOS.
 Only string values are mirrored.
 
+The wrapper replaces `set` and `remove` with `Object.defineProperty` on the
+instance: they are read-only on the store's Nitro prototype
+(`HybridObjectPrototype.cpp`), so plain assignment throws. The MMKV double in
+`test-utils/` is a plain object and would not show it.
+
 ## Symptom pattern
 
 The Apple TV app opens on the server setup screen as if just installed, saved

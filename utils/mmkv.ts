@@ -6,9 +6,7 @@ import { keepDurableKeysAcrossPurges } from "./durableStorage";
 // https://github.com/mrousavy/react-native-mmkv
 export const storage = createMMKV();
 
-// On tvOS react-native-mmkv writes to Library/Caches, which the system empties
-// when it needs space, so the session and saved servers are kept in the
-// Keychain as well. Android TV and phones keep the file in permanent storage.
+// Only tvOS keeps the MMKV file in a cache the system can empty.
 if (Platform.OS === "ios" && Platform.isTV) {
   keepDurableKeysAcrossPurges(storage);
 }

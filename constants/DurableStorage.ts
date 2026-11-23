@@ -1,11 +1,8 @@
 /**
- * MMKV keys that tvOS must not lose when it empties the app's caches. On tvOS
- * react-native-mmkv keeps its file in Library/Caches, which the system purges
- * between launches when it needs space; these keys are mirrored to the
- * Keychain and restored from it (utils/durableStorage.ts). Only string values
- * are kept, and only what the app cannot rebuild: the session, the saved
- * servers and their accounts, the server picked on the TV login screen, and
- * the user's settings.
+ * MMKV keys whose values the app cannot rebuild, kept in the Keychain as well
+ * on tvOS so a purge of its caches does not lose them (utils/durableStorage.ts):
+ * the session, the saved servers and their accounts, the server picked on the
+ * TV login screen, and the settings. Their values must be strings.
  */
 export const DURABLE_STORAGE_KEYS = [
   "serverUrl",
