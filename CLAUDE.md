@@ -107,6 +107,7 @@ TV platform:
 - `android-tv-modal-close-loses-focus` | a dismissed TV modal route leaves Android TV with nothing focused; the page must hand the focus back with requestTVFocus(). BlurView only tints there
 - `amlogic-fra-fires-before-real-framerate` | the vendor HDMI frame-rate adaptation switches on the codec's 30fps default, before MKV's real rate is known, and never corrects; app-side preferredDisplayModeId matching (matchRefreshRate setting) is the fix
 - `tv-preferred-focus-grabs-on-mount` | hasTVPreferredFocus takes the focus as the view enters the window, out of the tab bar too (tvOS when the bar lands on a tab, Android TV on every press that opens one); tab roots must not set it on mount, Home only once per session
+- `tvos-mmkv-lives-in-purgeable-caches` | react-native-mmkv writes to Library/Caches on tvOS, which the system empties between launches; keys the app cannot rebuild go in `DURABLE_STORAGE_KEYS`, which `utils/durableStorage.ts` mirrors to the Keychain
 
 Build and tooling:
 - `eas-archive-drops-gitignored-tracked-files` | EAS uploads skip anything matching .gitignore even if tracked; re-include required assets, keep asset require() at module scope
